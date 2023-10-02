@@ -59,6 +59,10 @@ public class Calculator {
         }
         return operand;
     }
+
+    public double pow(double a, double b) {
+        return Math.pow(a, b);
+    }
 }
 
 

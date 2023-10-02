@@ -34,9 +34,34 @@ public class CalculationTest {
         Calculator calculator = new Calculator();
         assertThat(calculator.calculation(100,90,'/')).isEqualTo(2);
     }
+
+    @Test
+    void DivizionByZeryTest(){
+        //// Проверка деления на ноль
+        //try {
+        // Calculator.calculation(1, 0, '/');
+        // assert false; // Если мы здесь, значит, ожидаемого исключения не было
+        //} catch (ArithmeticException e) {
+        // assert true; // Мы ожидаем исключение ArithmeticException при делении на ноль
+        //}
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() ->
+                calculator.calculation(8,0,'/'))
+                .isInstanceOf(ArithmeticException.class);
+    }
+
     @Test
     void expectedIllegalStateExceptionOnInvalidOperatorSymbol ()
     {
+        /*
+        // Проверка неправильного оператора
+        try {
+         Calculator.calculation(1, 1, 'a');
+         assert false; // Если мы здесь, значит, ожидаемого исключения не было
+        } catch (IllegalStateException e) {
+         assert true; // Мы ожидаем исключение IllegalStateException при использовании неправильного оператора
+        }
+         */
         Calculator calculator = new Calculator();
         assertThatThrownBy(() ->
                 calculator.calculation(8,4,'_'))
@@ -75,5 +100,37 @@ public class CalculationTest {
                         System.setIn(inputStream);
         System.setOut(null);
     }
+
+    /*
+    код с презентации Семинара 2 по заданиям лекции 2
+     */
+    @Test
+    void testIntegerValue(){
+        // Проверка максимального и минимального значения, которое может хранить тип int
+        assert Integer.MAX_VALUE == Calculator.calculation(Integer.MAX_VALUE - 1, 1, '+');
+        assert Integer.MIN_VALUE == Calculator.calculation(Integer.MIN_VALUE + 1, -1, '+');
+    }
+
+    // Проверка переполнения - странный код с презентации к уроку
+//    @Test
+//    void CheckingIntegerOverflow(){
+//        try {
+//            Calculator.calculation(Integer.MAX_VALUE, 1, '+');
+//            assert false; // Если мы здесь, значит, ожидаемого исключения не было
+//        } catch (ArithmeticException e) {
+//            assert true; // Мы ожидаем исключение ArithmeticException при переполнении
+//        }
+//        try {
+//            Calculator.calculation(Integer.MIN_VALUE, -1, '+');
+//            assert false; // Если мы здесь, значит, ожидаемого исключения не было
+//        } catch (ArithmeticException e) {
+//            assert true; // Мы ожидаем исключение ArithmeticException при переполнении
+//        }
+        //my code
+//        Calculator calculator = new Calculator();
+//        assertThatThrownBy(() ->
+//                calculator.calculation(Integer.MAX_VALUE, 1, '+'))
+//                .isInstanceOf(ArithmeticException.class);
+//    }
 
 }
