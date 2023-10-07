@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
 
 class MainTest {
 
@@ -30,13 +33,27 @@ class MainTest {
      * чтобы за два вызова next() Iterator вернул два слова  “Hello World”,
      * и проверить это поведение с помощью утверждений
      */
+    /*
+     используется mock(Iterator.class) для создания мок-объекта Iterator.
+     Затем мы настраиваем его поведение с помощью when() и thenReturn(). Мы говорим, ч
+     то при первом вызове метода next() мок-объект должен возвращать строку "Hello",
+     а при втором вызове - строку "World".
+Затем, в блоке Act мы вызываем методы next() два раза и конкатенируем полученные строки с помощью оператора +.
+В блоке Assert мы сравниваем результат с ожидаемым значением "Hello World" с помощью метода assertEquals().
+Таким образом, этот тест проверяет, что мок-объект Iterator действительно возвращает строки "Hello" и "World"
+при двух последовательных вызовах метода next().
+     */
       @Test
       public void iteratorWillReturnHelloWorld() {
           // Arrange
-          Iterator iteratorMock = mock(Iterator.class);
-          //when(iteratorMock.next()).thenReturn("Hello")...;
+          Iterator<String> iteratorMock = mock(Iterator.class);
+          when(iteratorMock.next()).thenReturn("Hello", "World");
+
           // Act
-          // ...
+          String result = iteratorMock.next() + " " + iteratorMock.next();
+
+          // Assert
+          assertEquals("Hello World", result);
       }
 
 }

@@ -1,5 +1,10 @@
 package fourth.card;
 
+import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 class PaymentFormTest {
 
     /**
@@ -13,6 +18,28 @@ class PaymentFormTest {
      * Вызовите метод `pay()` и убедитесь, что мок-объект вызывает метод `charge()`
      */
 
+    @Test
+    public void paymentFormShouldChargeCreditCard() {
+        // Arrange - Создается мок-объект creditCardMock с помощью метода mock(CreditCard.class).
+        CreditCard creditCardMock = mock(CreditCard.class);
 
+        //- Создается экземпляр класса PaymentForm и передается мок-объект creditCardMock в
+        // качестве аргумента конструктора.
+        PaymentForm paymentForm = new PaymentForm(creditCardMock);
 
+        double amount = 100.0;
+
+        // Act - - Вызывается метод pay() на объекте paymentForm с передачей заданной суммы amount.
+        paymentForm.pay(amount);
+
+        // Assert - проверяется, что метод charge() у мок-объекта creditCardMock был вызван с заданной суммой
+        // amount с помощью метода verify(creditCardMock).charge(amount).
+        verify(creditCardMock).charge(amount);
+    }
+
+    /*
+    Таким образом, в этом модульном тесте проверяется, что метод pay() класса PaymentForm вызывает метод charge()
+    у объекта CreditCard. Это гарантирует, что форма оплаты корректно использует кредитную карту для
+    выполнения оплаты.
+     */
 }
