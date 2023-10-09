@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,4 +64,30 @@ public class BookServiceTest {
         // Проверяем, что метод findAll был вызван
         verify(bookRepository).findAll();
     }
+
+//    Тесты на граничные случаи: Рассмотрите возможность добавления тестов на граничные случаи.
+//    Например, проверьте, как ваш код обрабатывает ситуации, когда bookRepository возвращает
+//    null или пустой список книг.
+//
+//    Обработка исключений: Рассмотрите возможность добавления тестов, которые проверяют
+//    обработку исключений в методах findBookById и findAllBooks. Например, можно создать тесты
+//    , в которых bookRepository возвращает null, и проверить, как ваш код обрабатывает
+//    такие ситуации.
+//
+//    Изолированные тесты: Помните, что тесты должны быть изолированными и не зависеть
+//    от действительной реализации BookRepository. Проверьте, что ваши тесты не содержат
+//    жестких зависимостей от конкретной реализации BookRepository.
+//
+//    Пример улучшения теста с обработкой исключений:
+
+//    @Test
+//    public void testFindBookById_NullRepository() {
+//        // Задаем ожидаемое поведение мока - при вызове метода findById с аргументом "1" вернуть null
+//        when(bookRepository.findById("3")).thenReturn(null);
+//
+//        // Выполняем метод findBookById и ожидаем исключение NotFoundException
+//        assertThrows(NotFoundException.class, () -> bookService.findBookById("1"));
+//    }
+    //Этот тест проверяет, что метод findBookById обрабатывает случай,
+    // когда bookRepository возвращает null и выбрасывает исключение NotFoundException.
 }
